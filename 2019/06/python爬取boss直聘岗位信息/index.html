@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.55.5 with theme Tranquilpeak 0.4.3-SNAPSHOT">
+<meta name="author" content="李航">
+<meta name="keywords" content="">
+<meta name="description" content="">
+
+
+<meta property="og:description" content="">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python爬取boss直聘岗位信息">
+<meta name="twitter:title" content="python爬取boss直聘岗位信息">
+<meta property="og:url" content="https://example.org/2019/06/python%E7%88%AC%E5%8F%96boss%E7%9B%B4%E8%81%98%E5%B2%97%E4%BD%8D%E4%BF%A1%E6%81%AF/">
+<meta property="twitter:url" content="https://example.org/2019/06/python%E7%88%AC%E5%8F%96boss%E7%9B%B4%E8%81%98%E5%B2%97%E4%BD%8D%E4%BF%A1%E6%81%AF/">
+<meta property="og:site_name" content="我的个人博客">
+<meta property="og:description" content="">
+<meta name="twitter:description" content="">
+<meta property="og:locale" content="zh-cn">
+
+  
+    <meta property="article:published_time" content="2019-06-02T00:00:00">
+  
+  
+    <meta property="article:modified_time" content="2019-06-02T00:00:00">
+  
+  
+  
+    
+      <meta property="article:section" content="python">
+    
+      <meta property="article:section" content="爬虫">
+    
+  
+  
+    
+      <meta property="article:tag" content="python">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+  <meta property="og:image" content="//timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1559580302255&di=ec3d5be9a4ebb531d71dfd2a6253b74e&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201605%2F17%2F20160517184806_eESAK.png">
+  <meta property="twitter:image" content="//timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1559580302255&di=ec3d5be9a4ebb531d71dfd2a6253b74e&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201605%2F17%2F20160517184806_eESAK.png">
+
+
+
+
+
+  <meta property="og:image" content="http://img3.duitang.com/uploads/item/201505/11/20150511230332_dYGsR.thumb.700_0.jpeg">
+  <meta property="twitter:image" content="http://img3.duitang.com/uploads/item/201505/11/20150511230332_dYGsR.thumb.700_0.jpeg">
+
+
+    <title>python爬取boss直聘岗位信息</title>
+
+    <link rel="icon" href="https://example.org/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="https://example.org/2019/06/python%E7%88%AC%E5%8F%96boss%E7%9B%B4%E8%81%98%E5%B2%97%E4%BD%8D%E4%BF%A1%E6%81%AF/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://example.org/css/style-nnm2spxvve8onlujjlegkkytaehyadd4ksxc1hyzzq9a2wvtrgbljqyulomn.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://example.org/">我的个人博客</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://example.org/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="http://img3.duitang.com/uploads/item/201505/11/20150511230332_dYGsR.thumb.700_0.jpeg" alt="作者的图片" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://example.org/#about">
+          <img class="sidebar-profile-picture" src="http://img3.duitang.com/uploads/item/201505/11/20150511230332_dYGsR.thumb.700_0.jpeg" alt="作者的图片" />
+        </a>
+        <h4 class="sidebar-profile-name">李航</h4>
+        
+          <h5 class="sidebar-profile-bio">Say less, do more</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://example.org/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">首页</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://example.org/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">分类</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://example.org/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">标签</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://example.org/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">归档</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://example.org/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">关于</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/lihang1010" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://example.org/index.xml">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      python爬取boss直聘岗位信息
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2019-06-02T00:00:00Z">
+        
+  六月 2, 2019
+
+      </time>
+    
+    
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="https://example.org/categories/python">python</a>, 
+    
+      <a class="category-link" href="https://example.org/categories/%e7%88%ac%e8%99%ab">爬虫</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <h3 id="代码环境"><strong>代码环境</strong></h3>
+
+<ol>
+<li>python 3.7</li>
+<li>pip 19.0.3</li>
+</ol>
+
+<hr />
+
+<h3 id="主要引用的第三方库"><strong>主要引用的第三方库</strong></h3>
+
+<ol>
+<li>requests，用于模拟http/https请求
+
+<ul>
+<li>安装： <code>pip install requests</code></li>
+<li>文档： <a href="http://www.python-requests.org/zh_CN/latest/">requests中文文档</a></li>
+</ul></li>
+<li>beautifulsoup4，用于解析网页，得出我们想要的内容。
+
+<ul>
+<li>安装： <code>pip install beautifulsoup4</code></li>
+<li>文档： <a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc.zh/">bs4中文文档</a></li>
+</ul></li>
+<li>xlwt，将爬到的结果以Excel的形式保存到本地
+
+<ul>
+<li>安装： <code>pip install xlwt</code></li>
+<li>api： <a href="https://xlwt.readthedocs.io/en/latest/api.html">xlwt api</a></li>
+</ul></li>
+</ol>
+
+<hr />
+
+<h3 id="打开网页"><strong>打开网页</strong></h3>
+
+<p>首先打开<a href="https://www.zhipin.com/">boss直聘官网</a>，选择一个地点，然后输入关键字，点击搜索，这里以深圳、python为例。
+<img src="picture1.png" alt="pic" /></p>
+
+<p>观察地址栏URL，可以发现有四个参数，分别是query,city,industry和position，query和city很明显是我输入的python和选择的地点深圳；而industry和position也就是公司行业和职位类型，这里没有选择这两项。</p>
+
+<hr />
+
+<h3 id="分析网页"><strong>分析网页</strong></h3>
+
+<p>F12打开开发者工具
+<img src="picture2.png" alt="" />
+每一条职位信息都在一个<code>&lt;li&gt;</code>标签中，<code>&lt;li&gt;</code>标签下的<code>&lt;div class=&quot;job-primary&quot;&gt;</code>就是我们要找的内容，以第一条为例:</p>
+
+<pre><code class="language-html">&lt;div class=&quot;job-primary&quot;&gt;
+    &lt;div class=&quot;info-primary&quot;&gt;
+        &lt;h3 class=&quot;name&quot;&gt;
+            &lt;a href=&quot;/job_detail/3ff9677f5b1e170a1XJ83Nu-FFQ~.html&quot; data-jid=&quot;3ff9677f5b1e170a1XJ83Nu-FFQ~&quot; data-itemid=&quot;1&quot; data-lid=&quot;1wpWFL3VLoV.search&quot; data-jobid=&quot;26676346&quot; data-index=&quot;0&quot; ka=&quot;search_list_1&quot; target=&quot;_blank&quot;&gt;
+                &lt;div class=&quot;job-title&quot;&gt;Python&lt;/div&gt;
+                &lt;span class=&quot;red&quot;&gt;20-40K&lt;/span&gt;
+                &lt;div class=&quot;info-detail&quot;&gt;&lt;/div&gt;
+            &lt;/a&gt;
+        &lt;/h3&gt;
+        &lt;p&gt;深圳 南山区 科技园&lt;em class=&quot;vline&quot;&gt;&lt;/em&gt;3-5年&lt;em class=&quot;vline&quot;&gt;&lt;/em&gt;本科&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;info-company&quot;&gt;
+        &lt;div class=&quot;company-text&quot;&gt;
+            &lt;h3 class=&quot;name&quot;&gt;&lt;a href=&quot;/gongsi/2e64a887a110ea9f1nRz.html&quot; ka=&quot;search_list_company_1_custompage&quot; target=&quot;_blank&quot;&gt;腾讯&lt;/a&gt;&lt;/h3&gt;
+            &lt;p&gt;互联网&lt;em class=&quot;vline&quot;&gt;&lt;/em&gt;已上市&lt;em class=&quot;vline&quot;&gt;&lt;/em&gt;10000人以上&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;info-publis&quot;&gt;
+        &lt;h3 class=&quot;name&quot;&gt;&lt;img src=&quot;https://img2.bosszhipin.com/boss/avatar/avatar_7.png?x-oss-process=image/resize,w_40,limit_0&quot; /&gt;王先生&lt;em class=&quot;vline&quot;&gt;&lt;/em&gt;高级开发工程师&lt;/h3&gt;
+        &lt;p&gt;&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;a href=&quot;javascript:;&quot; data-url=&quot;/wapi/zpgeek/friend/add.json?jobId=3ff9677f5b1e170a1XJ83Nu-FFQ~&amp;lid=1wpWFL3VLoV.search&quot; redirect-url=&quot;/geek/new/index/chat?id=0abcd66dded613a01HBy39-7GVE~&quot; class=&quot;btn btn-startchat&quot;&gt;立即沟通
+    &lt;/a&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>这段html代码中可提取的信息：</p>
+
+<ol>
+<li>岗位名称：Python</li>
+<li>薪资：20-40k</li>
+<li>公司地址：深圳 南山区 科技园</li>
+<li>工作经验：3-5年</li>
+<li>学历要求：本科</li>
+<li>公司名称：腾讯</li>
+<li>公司行业：互联网</li>
+<li>融资情况：已上市</li>
+<li>公司规模：10000人以上</li>
+</ol>
+
+<hr />
+
+<h3 id="获取url"><strong>获取URL</strong></h3>
+
+<ul>
+<li><p>获取城市编码</p>
+
+<p>url中的city=101280600，显示的是深圳，说明城市名有一个对应的编号，F12 点击Network选中XHR，有一个city.json
+<img src="picture3.png" alt="" /></p></li>
+</ul>
+
+<pre><code class="language-python"># 城市名称转成编码
+def get_city_code(city_name):
+    response = requests.get(&quot;https://www.zhipin.com/wapi/zpCommon/data/city.json&quot;)
+    contents = json.loads(response.text)
+    cities = contents[&quot;zpData&quot;][&quot;hotCityList&quot;]
+    city_code = contents[&quot;zpData&quot;][&quot;locationCity&quot;][&quot;code&quot;]
+    for city in cities:
+        if city[&quot;name&quot;] == city_name:
+            city_code = city[&quot;code&quot;]
+    return city_code
+</code></pre>
+
+<ul>
+<li>根据搜索条件，城市编码，行业和职位类型，获取分页的urls</li>
+</ul>
+
+<pre><code class="language-python"># 获取所有页的url，返回list
+def get_urls(query=&quot;&quot;, city=&quot;&quot;, industry=&quot;&quot;, position=&quot;&quot;, page=1) -&gt; list:
+    base_url = &quot;https://www.zhipin.com/job_detail/?query={}&amp;city={}&amp;industry={}&amp;position={}&amp;page={}&quot;
+    urls = []
+    url = base_url.format(query, city, industry, position, page)
+    response = requests.get(url, headers=headers)
+    soup = BeautifulSoup(response.text, &quot;lxml&quot;)
+    page_list = soup.find(&quot;div&quot;, &quot;page&quot;).find_all(&quot;a&quot;)
+    urls.append(url)
+    while page_list[len(page_list) - 1][&quot;href&quot;] != &quot;javascript:;&quot;:
+        page += 1
+        url = base_url.format(query, city, industry, position, page)
+        urls.append(url)
+        response = requests.get(url, headers=headers)
+        soup = BeautifulSoup(response.text, &quot;lxml&quot;)
+        page_list = soup.find(&quot;div&quot;, &quot;page&quot;).find_all(&quot;a&quot;)
+    return urls
+</code></pre>
+
+<hr />
+
+<h3 id="获取html代码"><strong>获取HTML代码</strong></h3>
+
+<pre><code class="language-python">def get_html(url):
+    response = requests.get(url, headers=headers)
+    if responese.status_code == 200:
+        return response.text
+</code></pre>
+
+<hr />
+
+<h3 id="从html中提取信息"><strong>从HTML中提取信息</strong></h3>
+
+<p>这里要注意一点：岗位信息是在鼠标悬浮在某一条职位信息才会显示出来，同样查看network 选择XHR：
+<img src="picture4.png" alt="" />
+有一个card.json的链接，有jid和lid两个参数</p>
+
+<pre><code class="language-python">def get_content(html) -&gt; list:
+    bs = BeautifulSoup(html, 'lxml')
+    contents = []
+    for info in bs.find_all(&quot;div&quot;, &quot;job-primary&quot;):
+        job_name = info.find(&quot;div&quot;, &quot;job-title&quot;).get_text()  # 职位名称
+        company = info.find(&quot;div&quot;, &quot;company-text&quot;).a.get_text()  # 公司名称
+        jid = info.find(&quot;div&quot;, &quot;info-primary&quot;).a[&quot;data-jid&quot;]
+        lid = info.find(&quot;div&quot;, &quot;info-primary&quot;).a[&quot;data-lid&quot;]
+        desc = get_job_desc(jid, lid)  # 岗位描述
+        texts = [text for text in info.find(&quot;div&quot;, &quot;info-primary&quot;).p.stripped_strings]
+        site = texts[0]  # 公司地址
+        work_exp = texts[1]  # 工作经验
+        edu_bak = texts[2]  # 学历要求
+        salary = info.span.get_text()  # 薪资
+        companies = [text for text in info.find(&quot;div&quot;, &quot;company-text&quot;).p.stripped_strings]
+        industry = companies[0]  # 公司行业
+        if len(companies) &gt; 2:
+            finance = companies[1]  # 融资情况
+            staff_num = companies[2]  # 公司规模
+        else:
+            finance = None
+            staff_num = companies[1]
+        contents.append(job_info(job_name, company, industry, finance, staff_num, salary, site, work_exp, edu_bak, desc))
+        time.sleep(1)
+    return contents
+</code></pre>
+
+<hr />
+
+<h3 id="将爬取的数据保存到本地excel"><strong>将爬取的数据保存到本地excel</strong></h3>
+
+<pre><code class="language-python">def save_data(content, city, query):
+    file = xlwt.Workbook(encoding=&quot;utf-8&quot;, style_compression=0)
+    sheet = file.add_sheet(&quot;job_info&quot;, cell_overwrite_ok=True)
+    sheet.write(0, 0, &quot;职位名称&quot;)
+    sheet.write(0, 1, &quot;公司名称&quot;)
+    sheet.write(0, 2, &quot;行业&quot;)
+    sheet.write(0, 3, &quot;融资情况&quot;)
+    sheet.write(0, 4, &quot;公司人数&quot;)
+    sheet.write(0, 5, &quot;薪资&quot;)
+    sheet.write(0, 6, &quot;工作地点&quot;)
+    sheet.write(0, 7, &quot;工作经验&quot;)
+    sheet.write(0, 8, &quot;学历要求&quot;)
+    sheet.write(0, 9, &quot;职位描述&quot;)
+    for i in range(len(content)):
+        sheet.write(i+1, 0, content[i][&quot;job_name&quot;])
+        sheet.write(i+1, 1, content[i][&quot;company&quot;])
+        sheet.write(i+1, 2, content[i][&quot;industry&quot;])
+        sheet.write(i+1, 3, content[i][&quot;finance&quot;])
+        sheet.write(i+1, 4, content[i][&quot;staff_number&quot;])
+        sheet.write(i+1, 5, content[i][&quot;salary&quot;])
+        sheet.write(i+1, 6, content[i][&quot;site&quot;])
+        sheet.write(i+1, 7, content[i][&quot;work_experience&quot;])
+        sheet.write(i+1, 8, content[i][&quot;education_bak&quot;])
+        sheet.write(i+1, 9, content[i][&quot;job_desc&quot;])
+    file.save(r'c:\projects\{}_{}.xls'.format(city, query))
+</code></pre>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2019 李航. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="http://img3.duitang.com/uploads/item/201505/11/20150511230332_dYGsR.thumb.700_0.jpeg" alt="作者的图片" />
+    
+    <h4 id="about-card-name">李航</h4>
+    
+      <div id="about-card-bio">Say less, do more</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        软件工程师
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        中国
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="搜索" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center"></div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://example.org/2019/06/python%E7%88%AC%E5%8F%96boss%E7%9B%B4%E8%81%98%E5%B2%97%E4%BD%8D%E4%BF%A1%E6%81%AF/">
+                <h3 class="media-heading">python爬取boss直聘岗位信息</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jun 6, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero=""
+         data-message-one=""
+         data-message-other="">
+         1 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('https://example.org/images/cover-v1.2.0.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://example.org/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/example.org\/2019\/06\/python%E7%88%AC%E5%8F%96boss%E7%9B%B4%E8%81%98%E5%B2%97%E4%BD%8D%E4%BF%A1%E6%81%AF\/';
+          
+            this.page.identifier = '\/2019\/06\/python%E7%88%AC%E5%8F%96boss%E7%9B%B4%E8%81%98%E5%B2%97%E4%BD%8D%E4%BF%A1%E6%81%AF\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'hugo-tranquilpeak-theme';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+
