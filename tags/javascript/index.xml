@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>javascript on 我的个人博客</title>
+    <link>https://lihang1010.github.io/tags/javascript/</link>
+    <description>Recent content in javascript on 我的个人博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 02 Apr 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://lihang1010.github.io/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>JavaScript引用、浅拷贝和深拷贝问题</title>
+      <link>https://lihang1010.github.io/2019/04/javascript%E5%BC%95%E7%94%A8%E6%B5%85%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B7%B1%E6%8B%B7%E8%B4%9D%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Tue, 02 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://lihang1010.github.io/2019/04/javascript%E5%BC%95%E7%94%A8%E6%B5%85%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B7%B1%E6%8B%B7%E8%B4%9D%E9%97%AE%E9%A2%98/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

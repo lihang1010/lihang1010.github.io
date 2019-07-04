@@ -8,19 +8,37 @@
 <meta name="generator" content="Hugo 0.55.5 with theme Tranquilpeak 0.4.3-SNAPSHOT">
 <meta name="author" content="李航">
 <meta name="keywords" content="">
-<meta name="description" content="Hugo tranquilpeak theme demo">
+<meta name="description" content="">
 
 
-<meta property="og:description" content="Hugo tranquilpeak theme demo">
-<meta property="og:type" content="website">
-<meta property="og:title" content="题解">
-<meta name="twitter:title" content="题解">
-<meta property="og:url" content="https://lihang1010.github.io/tags/%E9%A2%98%E8%A7%A3/">
-<meta property="twitter:url" content="https://lihang1010.github.io/tags/%E9%A2%98%E8%A7%A3/">
+<meta property="og:description" content="">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript引用、浅拷贝和深拷贝问题">
+<meta name="twitter:title" content="JavaScript引用、浅拷贝和深拷贝问题">
+<meta property="og:url" content="https://lihang1010.github.io/2019/04/javascript%E5%BC%95%E7%94%A8%E6%B5%85%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B7%B1%E6%8B%B7%E8%B4%9D%E9%97%AE%E9%A2%98/">
+<meta property="twitter:url" content="https://lihang1010.github.io/2019/04/javascript%E5%BC%95%E7%94%A8%E6%B5%85%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B7%B1%E6%8B%B7%E8%B4%9D%E9%97%AE%E9%A2%98/">
 <meta property="og:site_name" content="我的个人博客">
-<meta property="og:description" content="Hugo tranquilpeak theme demo">
-<meta name="twitter:description" content="Hugo tranquilpeak theme demo">
+<meta property="og:description" content="">
+<meta name="twitter:description" content="">
 <meta property="og:locale" content="zh-cn">
+
+  
+    <meta property="article:published_time" content="2019-04-02T00:00:00">
+  
+  
+    <meta property="article:modified_time" content="2019-04-02T00:00:00">
+  
+  
+  
+    
+      <meta property="article:section" content="javascript">
+    
+  
+  
+    
+      <meta property="article:tag" content="javascript">
+    
+  
 
 
 <meta name="twitter:card" content="summary">
@@ -31,6 +49,9 @@
 
 
 
+  <meta property="og:image" content="//timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1559580302255&di=ec3d5be9a4ebb531d71dfd2a6253b74e&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201605%2F17%2F20160517184806_eESAK.png">
+  <meta property="twitter:image" content="//timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1559580302255&di=ec3d5be9a4ebb531d71dfd2a6253b74e&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201605%2F17%2F20160517184806_eESAK.png">
+
 
 
 
@@ -39,16 +60,14 @@
   <meta property="twitter:image" content="http://img3.duitang.com/uploads/item/201505/11/20150511230332_dYGsR.thumb.700_0.jpeg">
 
 
-    <title>题解</title>
+    <title>JavaScript引用、浅拷贝和深拷贝问题</title>
 
     <link rel="icon" href="https://lihang1010.github.io/favicon.png">
     
-      <link rel="alternate" type="application/rss+xml" title="RSS" href="https://lihang1010.github.io/tags/%E9%A2%98%E8%A7%A3/index.xml">
-    
 
     
 
-    <link rel="canonical" href="https://lihang1010.github.io/tags/%E9%A2%98%E8%A7%A3/">
+    <link rel="canonical" href="https://lihang1010.github.io/2019/04/javascript%E5%BC%95%E7%94%A8%E6%B5%85%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B7%B1%E6%8B%B7%E8%B4%9D%E9%97%AE%E9%A2%98/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -68,7 +87,7 @@
 
   <body>
     <div id="blog">
-      <header id="header" data-behavior="1">
+      <header id="header" data-behavior="4">
   <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
   <div class="header-title">
     <a class="header-title-link" href="https://lihang1010.github.io/">我的个人博客</a>
@@ -88,7 +107,7 @@
   
 </header>
 
-      <nav id="sidebar" data-behavior="1">
+      <nav id="sidebar" data-behavior="4">
   <div class="sidebar-container">
     
       <div class="sidebar-profile">
@@ -187,35 +206,21 @@
 </nav>
 
       
-        
 
-      
-      <div id="main" data-behavior="1"
+      <div id="main" data-behavior="4"
         class="
                hasCoverMetaIn
                ">
-        
-          <section class="postShorten-group main-content-wrap">
-            
-            
-              
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
   
-    
+    <h1 class="post-title" itemprop="headline">
+      JavaScript引用、浅拷贝和深拷贝问题
+    </h1>
   
-
-
   
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="https://lihang1010.github.io/2019/04/leetcode-%E9%93%BE%E8%A1%A8easy-%E9%A2%98%E8%A7%A31/">
-          leetcode   链表(Easy)   题解(1)
-        </a>
-      </h1>
-      
   <div class="postShorten-meta post-meta">
     
       <time itemprop="datePublished" datetime="2019-04-02T00:00:00Z">
@@ -229,103 +234,209 @@
   
     <span>发布在</span>
     
-      <a class="category-link" href="https://lihang1010.github.io/categories/java">java</a>, 
-    
-      <a class="category-link" href="https://lihang1010.github.io/categories/%e7%ae%97%e6%b3%95">算法</a>, 
-    
-      <a class="category-link" href="https://lihang1010.github.io/categories/%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84">数据结构</a>
+      <a class="category-link" href="https://lihang1010.github.io/categories/javascript">javascript</a>
     
   
 
   </div>
 
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <h2 id="定义两个对象作为实验的例子"><strong>定义两个对象作为实验的例子</strong></h2>
+
+<pre><code class="language-javascript">var person = {
+    name: &quot;zhangsan&quot;,
+    age: 22,
+    hobbies: {
+        game: &quot;LOL&quot;,
+        sport: &quot;basketball&quot;
+    }
+}
+
+var girl = {
+    name: &quot;krystal&quot;,
+    age: 24,
+    height: 170
+}
+</code></pre>
+
+<hr />
+
+<h2 id="引用"><strong>引用</strong></h2>
+
+<pre><code class="language-javascript">var person1 = person;
+var girl1 = girl;
+</code></pre>
+
+<p>赋值之后，相当于person1和person指向同一个对象，girl1和girl指向同一个对象。</p>
+
+<pre><code class="language-javascript">person1.name = &quot;lisi&quot;
+girls.age = 18
+console.log(person.name);  //lisi
+console.log(girl.age);     //18
+</code></pre>
+
+<p>显然，因为指向同一个对象，修改person1和girl1的属性值，person和girl的属性值也会随之改变。</p>
+
+<hr />
+
+<h2 id="浅拷贝"><strong>浅拷贝</strong></h2>
+
+<p><strong><div style="color:red">注意：浅拷贝不是引用</div></strong></p>
+
+<p>浅拷贝是将一个对象的所有属性克隆给一个新的对象</p>
+
+<pre><code class="language-javascript">//浅拷贝
+function shallowCopy(obj) {
+    var result = Array.isArray(obj) ? [] : {};
+    for (var prop in obj) {
+        if (obj.hasOwnProperty(prop)) {
+            result[prop] = obj[prop];
+        }
+    }
+    return result;
+}
+</code></pre>
+
+<p>仔细观察该函数，可以发现，浅拷贝只是简单的将对象的第一层拷贝出来给一个新的对象。但是如果原对象某一属性是引用类型，那么就会出现直接引用、赋值的情况。以上面定义的person对象为例：</p>
+
+<pre><code class="language-javascript">var person1 = shallowCopy(person);
+person1.hobbies.sport = &quot;football&quot;;
+console.log(person.hobbies.sport);  //输出football
+</code></pre>
+
+<p>修改新对象的值依然会影响原对象，这显然与我们的需求不符合，这时候深拷贝就派上用场了！</p>
+
+<hr />
+
+<h2 id="深拷贝"><strong>深拷贝</strong></h2>
+
+<p>在搞明白浅拷贝的缺陷之后，我们很容易实现深拷贝。既然浅拷贝只拷贝了第一层属性，那么深拷贝就可以判断对象的属性，如果是引用类型，就递归调用，直到不是引用类型为止。</p>
+
+<pre><code class="language-javascript">//深拷贝
+function deepCopy(obj) {
+    var result = Array.isArray(obj) ? [] : {};
+    if (obj &amp;&amp; typeof(obj) === &quot;object&quot;) {
+        for (var prop in obj) {
+            if (obj.hasOwnProperty(prop)) {
+                if (obj[prop] &amp;&amp; typeof(obj[prop]) === &quot;object&quot;) {
+                    result[prop] = deepCopy(obj[prop]);
+                } else {
+                    result[prop] = obj[prop];
+                }
+            }
+        }
+    }
+    return result;
+}
+</code></pre>
+
+<p>深拷贝方法2：利用JSON函数，做两次转换：</p>
+
+<pre><code class="language-javascript">function deepCopy2(obj) {
+    var result = JSON.stringify(obj);
+    result = JSON.parse(result);
+    return result;
+}
+</code></pre>
+
+<hr />
+
+<h2 id="测试用例"><strong>测试用例</strong></h2>
+
+<pre><code class="language-javascript">var person = {
+    name: &quot;zhangsan&quot;,
+    age: 22
+}
+
+var arr1 = [&quot;111&quot;, &quot;222&quot;, &quot;333&quot;, person];
+var arr2 = arr1;
+var arr3 = shallowCopy(arr1);
+var arr4 = deepCopy(arr1);
+
+console.log(arr1);
+console.log(arr2);
+console.log(arr3);
+console.log(arr4);
+
+arr4[3].age = 44;
+console.log(&quot;------------------------------------------------------&quot;)
+console.log(arr1);
+console.log(arr2);
+console.log(arr3);
+console.log(arr4);
+</code></pre>
+
+<p>运行结果：</p>
+
+<p><img src="https://lihang1010.github.io/images/result.png" alt="pic" /></p>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://lihang1010.github.io/2019/06/python%E7%88%AC%E5%8F%96boss%E7%9B%B4%E8%81%98%E5%B2%97%E4%BD%8D%E4%BF%A1%E6%81%AF/" data-tooltip="python爬取boss直聘岗位信息">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://lihang1010.github.io/2019/04/leetcode-%E9%93%BE%E8%A1%A8easy-%E9%A2%98%E8%A7%A31/" data-tooltip="leetcode   链表(Easy)   题解(1)">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
       
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
         
       
-      <p>
-        <a href="https://lihang1010.github.io/2019/04/leetcode-%E9%93%BE%E8%A1%A8easy-%E9%A2%98%E8%A7%A31/" class="postShorten-excerpt_link link">阅读全文</a>
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
         
-      </p>
-    </div>
-  </div>
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
   
-    <a href="https://lihang1010.github.io/2019/04/leetcode-%E9%93%BE%E8%A1%A8easy-%E9%A2%98%E8%A7%A31/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1561050221811&amp;di=fdf9f6d7c4fe9c1f95446f2bc461fef0&amp;imgtype=0&amp;src=http%3A%2F%2Fp0.qhimg.com%2Ft0174dfc0ed2d451c38.png"/>
-      </div>
-    </a>
-  
-</article>
+</div>
 
             
               
-  
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="https://lihang1010.github.io/2019/04/leetcode-%E9%93%BE%E8%A1%A8easy-%E9%A2%98%E8%A7%A32/">
-          leetcode   链表(Easy)   题解(2)
-        </a>
-      </h1>
-      
-  <div class="postShorten-meta post-meta">
-    
-      <time itemprop="datePublished" datetime="2019-04-02T00:00:00Z">
-        
-  四月 2, 2019
-
-      </time>
-    
-    
-  
-  
-    <span>发布在</span>
-    
-      <a class="category-link" href="https://lihang1010.github.io/categories/java">java</a>, 
-    
-      <a class="category-link" href="https://lihang1010.github.io/categories/%e7%ae%97%e6%b3%95">算法</a>, 
-    
-      <a class="category-link" href="https://lihang1010.github.io/categories/%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84">数据结构</a>
-    
-  
-
-  </div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      
-        
-      
-      <p>
-        <a href="https://lihang1010.github.io/2019/04/leetcode-%E9%93%BE%E8%A1%A8easy-%E9%A2%98%E8%A7%A32/" class="postShorten-excerpt_link link">阅读全文</a>
-        
-      </p>
-    </div>
-  </div>
-  
-    <a href="https://lihang1010.github.io/2019/04/leetcode-%E9%93%BE%E8%A1%A8easy-%E9%A2%98%E8%A7%A32/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1561050221811&amp;di=fdf9f6d7c4fe9c1f95446f2bc461fef0&amp;imgtype=0&amp;src=http%3A%2F%2Fp0.qhimg.com%2Ft0174dfc0ed2d451c38.png"/>
-      </div>
-    </a>
-  
-</article>
-
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
             
-            
-
-          </section>
-        
+          </div>
+        </article>
         <footer id="footer" class="main-content-wrap">
   <span class="copyrights">
     &copy; 2019 李航. All Rights Reserved
@@ -333,6 +444,66 @@
 </footer>
 
       </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://lihang1010.github.io/2019/06/python%E7%88%AC%E5%8F%96boss%E7%9B%B4%E8%81%98%E5%B2%97%E4%BD%8D%E4%BF%A1%E6%81%AF/" data-tooltip="python爬取boss直聘岗位信息">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://lihang1010.github.io/2019/04/leetcode-%E9%93%BE%E8%A1%A8easy-%E9%A2%98%E8%A7%A31/" data-tooltip="leetcode   链表(Easy)   题解(1)">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
     </div>
     
     <div id="about">
@@ -508,6 +679,32 @@ $(document).ready(function() {
 });
 </script>
 
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/lihang1010.github.io\/2019\/04\/javascript%E5%BC%95%E7%94%A8%E6%B5%85%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B7%B1%E6%8B%B7%E8%B4%9D%E9%97%AE%E9%A2%98\/';
+          
+            this.page.identifier = '\/2019\/04\/javascript%E5%BC%95%E7%94%A8%E6%B5%85%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B7%B1%E6%8B%B7%E8%B4%9D%E9%97%AE%E9%A2%98\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'hugo-tranquilpeak-theme';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
 
 
 
