@@ -8,19 +8,37 @@
 <meta name="generator" content="Hugo 0.55.5 with theme Tranquilpeak 0.4.3-SNAPSHOT">
 <meta name="author" content="李航">
 <meta name="keywords" content="">
-<meta name="description" content="Hugo tranquilpeak theme demo">
+<meta name="description" content="">
 
 
-<meta property="og:description" content="Hugo tranquilpeak theme demo">
-<meta property="og:type" content="website">
-<meta property="og:title" content="数据结构">
-<meta name="twitter:title" content="数据结构">
-<meta property="og:url" content="https://lihang1010.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
-<meta property="twitter:url" content="https://lihang1010.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+<meta property="og:description" content="">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从源码探究java中的==和equals的区别">
+<meta name="twitter:title" content="从源码探究java中的==和equals的区别">
+<meta property="og:url" content="https://lihang1010.github.io/2019/03/%E4%BB%8E%E6%BA%90%E7%A0%81%E6%8E%A2%E7%A9%B6java%E4%B8%AD%E7%9A%84%E5%92%8Cequals%E7%9A%84%E5%8C%BA%E5%88%AB/">
+<meta property="twitter:url" content="https://lihang1010.github.io/2019/03/%E4%BB%8E%E6%BA%90%E7%A0%81%E6%8E%A2%E7%A9%B6java%E4%B8%AD%E7%9A%84%E5%92%8Cequals%E7%9A%84%E5%8C%BA%E5%88%AB/">
 <meta property="og:site_name" content="我的个人博客">
-<meta property="og:description" content="Hugo tranquilpeak theme demo">
-<meta name="twitter:description" content="Hugo tranquilpeak theme demo">
+<meta property="og:description" content="">
+<meta name="twitter:description" content="">
 <meta property="og:locale" content="zh-cn">
+
+  
+    <meta property="article:published_time" content="2019-03-26T00:00:00">
+  
+  
+    <meta property="article:modified_time" content="2019-03-26T00:00:00">
+  
+  
+  
+    
+      <meta property="article:section" content="java">
+    
+  
+  
+    
+      <meta property="article:tag" content="java">
+    
+  
 
 
 <meta name="twitter:card" content="summary">
@@ -31,6 +49,9 @@
 
 
 
+  <meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563213437757&di=f1cc3fd68181af9bafa50449e2bc5fe7&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201706%2F10%2F20170610095055_G5LM8.jpeg">
+  <meta property="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563213437757&di=f1cc3fd68181af9bafa50449e2bc5fe7&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201706%2F10%2F20170610095055_G5LM8.jpeg">
+
 
 
 
@@ -39,16 +60,14 @@
   <meta property="twitter:image" content="http://img3.duitang.com/uploads/item/201505/11/20150511230332_dYGsR.thumb.700_0.jpeg">
 
 
-    <title>数据结构</title>
+    <title>从源码探究java中的==和equals的区别</title>
 
     <link rel="icon" href="https://lihang1010.github.io/favicon.png">
     
-      <link rel="alternate" type="application/rss+xml" title="RSS" href="https://lihang1010.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/index.xml">
-    
 
     
 
-    <link rel="canonical" href="https://lihang1010.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+    <link rel="canonical" href="https://lihang1010.github.io/2019/03/%E4%BB%8E%E6%BA%90%E7%A0%81%E6%8E%A2%E7%A9%B6java%E4%B8%AD%E7%9A%84%E5%92%8Cequals%E7%9A%84%E5%8C%BA%E5%88%AB/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -68,7 +87,7 @@
 
   <body>
     <div id="blog">
-      <header id="header" data-behavior="1">
+      <header id="header" data-behavior="4">
   <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
   <div class="header-title">
     <a class="header-title-link" href="https://lihang1010.github.io/">我的个人博客</a>
@@ -88,7 +107,7 @@
   
 </header>
 
-      <nav id="sidebar" data-behavior="1">
+      <nav id="sidebar" data-behavior="4">
   <div class="sidebar-container">
     
       <div class="sidebar-profile">
@@ -187,40 +206,26 @@
 </nav>
 
       
-        
 
-      
-      <div id="main" data-behavior="1"
+      <div id="main" data-behavior="4"
         class="
                hasCoverMetaIn
                ">
-        
-          <section class="postShorten-group main-content-wrap">
-            
-            
-              
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
   
-    
+    <h1 class="post-title" itemprop="headline">
+      从源码探究java中的==和equals的区别
+    </h1>
   
-
-
   
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="https://lihang1010.github.io/2019/04/leetcode-%E9%93%BE%E8%A1%A8easy-%E9%A2%98%E8%A7%A31/">
-          leetcode   链表(Easy)   题解(1)
-        </a>
-      </h1>
-      
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2019-04-02T00:00:00Z">
+      <time itemprop="datePublished" datetime="2019-03-26T00:00:00Z">
         
-  四月 2, 2019
+  三月 26, 2019
 
       </time>
     
@@ -229,103 +234,184 @@
   
     <span>发布在</span>
     
-      <a class="category-link" href="https://lihang1010.github.io/categories/java">java</a>, 
-    
-      <a class="category-link" href="https://lihang1010.github.io/categories/%e7%ae%97%e6%b3%95">算法</a>, 
-    
-      <a class="category-link" href="https://lihang1010.github.io/categories/%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84">数据结构</a>
+      <a class="category-link" href="https://lihang1010.github.io/categories/java">java</a>
     
   
 
   </div>
 
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <h2 id="一-基本数据类型中的">一、<strong>基本数据类型中的 ‘==’</strong></h2>
+
+<pre><code class="language-java">public class test {
+
+    public static void main(String[] args) {
+        int a = 1;
+        int b = 1;
+        System.out.println(a == b); //true
+    }
+}
+</code></pre>
+
+<p>对于基本类型，==比较的就是值，值相同则返回true，否则返回false。基本类型没有equals方法。</p>
+
+<hr />
+
+<h2 id="二-引用类型中的">二、<strong>引用类型中的 ‘==’</strong></h2>
+
+<pre><code class="language-java">public class test {
+
+    public static void main(String[] args) {
+        String a = new String(&quot;abc&quot;);
+        String b = new String(&quot;abc&quot;);
+        System.out.println(a == b); //false
+        System.out.println(a.equals(b)); //true
+    }
+}
+</code></pre>
+
+<p>从这个例子可以看出，对于引用类型，==比较的就是指向对象的地址，地址相同则返回true，否则返回false；equals方法比较的是对象的值，值相同返回true，否则返回false。</p>
+
+<hr />
+
+<h2 id="三-源码分析">三、<strong>源码分析</strong></h2>
+
+<h3 id="object类的equals方法"><strong>Object类的equals方法</strong></h3>
+
+<pre><code class="language-java">public boolean equals(Object obj) {
+    return (this == obj);
+}
+</code></pre>
+
+<p>显然，对于Object类，==和equals是等价的。</p>
+
+<hr />
+
+<h3 id="string类的equals方法"><strong>String类的equals方法</strong></h3>
+
+<pre><code class="language-java">public boolean equals(Object anObject) {
+    if (this == anObject) {
+        return true;
+    }
+    if (anObject instanceof String) {
+        String anotherString = (String)anObject;
+        int n = value.length;
+        if (n == anotherString.value.length) {
+            char v1[] = value;
+            char v2[] = anotherString.value;
+            int i = 0;
+            while (n-- != 0) {
+                if (v1[i] != v2[i])
+                    return false;
+                i++;
+            }
+            return true;
+        }
+    }
+    return false;
+}
+</code></pre>
+
+<p>equals返回true的情况：
+1. 两个对象相同（指向同一个对象）。
+1. 两个字符串长度相同，且每一个对应位置的字符都相同。</p>
+
+<hr />
+
+<h2 id="四-为什么需要重写equals方法">四、<strong>为什么需要重写equals方法</strong></h2>
+
+<pre><code class="language-java">public class Person {
+
+    public String name;
+    public int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public static void main(String[] args) {
+        Person p1 = new Person(&quot;zhangsan&quot;, 12);
+        Person p2 = new Person(&quot;zhangsan&quot;, 12);
+        System.out.println(p1 == p2);  //false
+        System.out.println(p1.equals(p2)); //false
+    }
+}
+</code></pre>
+
+<p><strong>为什么p1.equals(p2)返回false？</strong></p>
+
+<p>因为Person类继承了基类Object，也就是说使用的是与Object类中相同的equals方法，根据上面的源码可知，equals方法和==等价，因此返回false。</p>
+
+<p>我定义了两个Person对象，并且给了他们相同的name和age，由于对象不同，所以==必然返回false，这个是正确的。但是p1.equals(p2)返回false，显然是与实际需求不同的，所以我们需要在这种时候，重写equals方法。</p>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://lihang1010.github.io/2019/04/leetcode-%E9%93%BE%E8%A1%A8easy-%E9%A2%98%E8%A7%A32/" data-tooltip="leetcode   链表(Easy)   题解(2)">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
       
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
         
       
-      <p>
-        <a href="https://lihang1010.github.io/2019/04/leetcode-%E9%93%BE%E8%A1%A8easy-%E9%A2%98%E8%A7%A31/" class="postShorten-excerpt_link link">阅读全文</a>
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
         
-      </p>
-    </div>
-  </div>
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
   
-    <a href="https://lihang1010.github.io/2019/04/leetcode-%E9%93%BE%E8%A1%A8easy-%E9%A2%98%E8%A7%A31/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="http://www.qqoi.cn/img_bizhi/245213298.jpeg"/>
-      </div>
-    </a>
-  
-</article>
+</div>
 
             
               
-  
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="https://lihang1010.github.io/2019/04/leetcode-%E9%93%BE%E8%A1%A8easy-%E9%A2%98%E8%A7%A32/">
-          leetcode   链表(Easy)   题解(2)
-        </a>
-      </h1>
-      
-  <div class="postShorten-meta post-meta">
-    
-      <time itemprop="datePublished" datetime="2019-04-02T00:00:00Z">
-        
-  四月 2, 2019
-
-      </time>
-    
-    
-  
-  
-    <span>发布在</span>
-    
-      <a class="category-link" href="https://lihang1010.github.io/categories/java">java</a>, 
-    
-      <a class="category-link" href="https://lihang1010.github.io/categories/%e7%ae%97%e6%b3%95">算法</a>, 
-    
-      <a class="category-link" href="https://lihang1010.github.io/categories/%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84">数据结构</a>
-    
-  
-
-  </div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      
-        
-      
-      <p>
-        <a href="https://lihang1010.github.io/2019/04/leetcode-%E9%93%BE%E8%A1%A8easy-%E9%A2%98%E8%A7%A32/" class="postShorten-excerpt_link link">阅读全文</a>
-        
-      </p>
-    </div>
-  </div>
-  
-    <a href="https://lihang1010.github.io/2019/04/leetcode-%E9%93%BE%E8%A1%A8easy-%E9%A2%98%E8%A7%A32/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="http://i8.download.fd.pchome.net/t_1920x1440/g1/M00/09/0C/oYYBAFOzfmGINuboADot8pDhoCkAABr-AOtkOUAOi4K360.jpg"/>
-      </div>
-    </a>
-  
-</article>
-
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
             
-            
-
-          </section>
-        
+          </div>
+        </article>
         <footer id="footer" class="main-content-wrap">
   <span class="copyrights">
     &copy; 2019 李航. All Rights Reserved
@@ -333,6 +419,66 @@
 </footer>
 
       </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://lihang1010.github.io/2019/04/leetcode-%E9%93%BE%E8%A1%A8easy-%E9%A2%98%E8%A7%A32/" data-tooltip="leetcode   链表(Easy)   题解(2)">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
     </div>
     
     <div id="about">
@@ -525,6 +671,32 @@ $(document).ready(function() {
 });
 </script>
 
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/lihang1010.github.io\/2019\/03\/%E4%BB%8E%E6%BA%90%E7%A0%81%E6%8E%A2%E7%A9%B6java%E4%B8%AD%E7%9A%84%E5%92%8Cequals%E7%9A%84%E5%8C%BA%E5%88%AB\/';
+          
+            this.page.identifier = '\/2019\/03\/%E4%BB%8E%E6%BA%90%E7%A0%81%E6%8E%A2%E7%A9%B6java%E4%B8%AD%E7%9A%84%E5%92%8Cequals%E7%9A%84%E5%8C%BA%E5%88%AB\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'hugo-tranquilpeak-theme';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
 
 
 
