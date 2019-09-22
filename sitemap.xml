@@ -21,13 +21,13 @@
   </url>
   
   <url>
-    <loc>https://lihang1010.github.io/tags/python/</loc>
+    <loc>https://lihang1010.github.io/categories/python/</loc>
     <lastmod>2019-06-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://lihang1010.github.io/categories/python/</loc>
+    <loc>https://lihang1010.github.io/tags/python/</loc>
     <lastmod>2019-06-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -67,13 +67,13 @@
   </url>
   
   <url>
-    <loc>https://lihang1010.github.io/tags/linux/</loc>
+    <loc>https://lihang1010.github.io/categories/linux/</loc>
     <lastmod>2019-05-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://lihang1010.github.io/categories/linux/</loc>
+    <loc>https://lihang1010.github.io/tags/linux/</loc>
     <lastmod>2019-05-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -95,13 +95,13 @@
   </url>
   
   <url>
-    <loc>https://lihang1010.github.io/tags/javascript/</loc>
+    <loc>https://lihang1010.github.io/categories/javascript/</loc>
     <lastmod>2019-04-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://lihang1010.github.io/categories/javascript/</loc>
+    <loc>https://lihang1010.github.io/tags/javascript/</loc>
     <lastmod>2019-04-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -123,25 +123,25 @@
   </url>
   
   <url>
-    <loc>https://lihang1010.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc>
-    <lastmod>2019-04-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://lihang1010.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc>
     <lastmod>2019-04-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://lihang1010.github.io/tags/%E7%AE%97%E6%B3%95/</loc>
+    <loc>https://lihang1010.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc>
     <lastmod>2019-04-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://lihang1010.github.io/categories/%E7%AE%97%E6%B3%95/</loc>
+    <lastmod>2019-04-02T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://lihang1010.github.io/tags/%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2019-04-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -169,25 +169,25 @@
   </url>
   
   <url>
-    <loc>https://lihang1010.github.io/tags/mysql/</loc>
-    <lastmod>2019-02-16T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://lihang1010.github.io/categories/mysql/</loc>
     <lastmod>2019-02-16T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://lihang1010.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/</loc>
-    <lastmod>2019-01-16T00:00:00+00:00</lastmod>
+    <loc>https://lihang1010.github.io/tags/mysql/</loc>
+    <lastmod>2019-02-16T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://lihang1010.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/</loc>
+    <lastmod>2019-01-16T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://lihang1010.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/</loc>
     <lastmod>2019-01-16T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
